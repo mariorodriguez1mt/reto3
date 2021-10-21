@@ -27,38 +27,72 @@ import javax.persistence.Table;
 @Table(name = "cabin")
 public class Cabin implements Serializable{
     /**
-     *Creacion de la tabla
+     *Creacion de la tabla con sus etiquetas
      */
     @Id
-    /**
-     * Se establece Id como llave primaria
-     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String brand;
+    /**
+     * declaración de las columnas, sus headers y tipos de valor
+     * se inicia con el Id
+     */
+    private Integer CabinId;
+    @Column(nullable = false,length = 45)
+    /**
+     *nombre de la cabaña
+     */
     private String name;
+    @Column(nullable = false,length = 45)
+    /**
+     * marca de la cabaña
+     */
+    private String brand;
+    /**
+     * numero de cuartos de cabaña
+     */
     private Integer rooms;
+    @Column(nullable = false,length = 250)
+    /**
+     * Descripción de cabaña
+     */
     private String description;
     
+    /**
+     * creación de relaciones con la tabla categoría de muchos a uno
+     */
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("cabins")
+    /**
+     * atributo relación con categoría
+     */
     private Category category;
     
+    /**
+     * creación de las relaciones con la tabla mensajes de uno a muchos
+     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
+    /**
+     * atributo relación con mensajes
+     */
     private List<Message> messages;
     
+    /**
+     * creación de las relaciones con la tabla mensajes de uno a muchos
+     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
+    /**
+     * atributo relación con reservaciones
+     */
     private List<Reservation> reservations;
 
-    public Integer getId() {
-        return id;
+    public Integer getCabinId() {
+        return CabinId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCabinId(Integer CabinId) {
+        this.CabinId = CabinId;
     }
 
     public String getBrand() {
