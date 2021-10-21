@@ -86,7 +86,11 @@ public class Cabin implements Serializable{
      * atributo relación con reservaciones
      */
     private List<Reservation> reservations;
-
+    
+    /**
+     * creacion de getter and setters
+     * @return Id de cabaña
+     */
     public Integer getCabinId() {
         return CabinId;
     }
