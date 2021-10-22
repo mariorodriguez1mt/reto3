@@ -5,6 +5,7 @@
 package retos.reto3cab;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cabin")
+@JsonPropertyOrder({"id","name","brand","rooms","description","category","messages","reservations"})
 public class Cabin implements Serializable{
     /**
      *Creacion de la tabla con sus etiquetas
