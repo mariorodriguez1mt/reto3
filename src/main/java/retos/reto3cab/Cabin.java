@@ -31,6 +31,7 @@ public class Cabin implements Serializable{
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     /**
      * declaración de las columnas, sus headers y tipos de valor
      * se inicia con el Id
