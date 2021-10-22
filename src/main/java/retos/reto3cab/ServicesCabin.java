@@ -27,10 +27,10 @@ public class ServicesCabin {
     }
     
     public Cabin save(Cabin cabana){
-        if(cabana.getCabinId()==null){
+        if(cabana.getId()==null){
             return metodosCrudCabin.save(cabana);
         }else{
-            Optional<Cabin> e=metodosCrudCabin.getCabin(cabana.getCabinId());
+            Optional<Cabin> e=metodosCrudCabin.getCabin(cabana.getId());
             if(e.isEmpty()){
                 return metodosCrudCabin.save(cabana);
             }else{
@@ -40,8 +40,8 @@ public class ServicesCabin {
     }
     
     public Cabin update(Cabin cabana){
-        if(cabana.getCabinId()!=null){
-            Optional<Cabin> e=metodosCrudCabin.getCabin(cabana.getCabinId());
+        if(cabana.getId()!=null){
+            Optional<Cabin> e=metodosCrudCabin.getCabin(cabana.getId());
             if(!e.isEmpty()){
                 if(cabana.getBrand()!=null){
                     e.get().setBrand(cabana.getBrand());

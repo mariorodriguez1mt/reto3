@@ -5,11 +5,9 @@
 package retos.reto3cab;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,80 +24,35 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cabin")
-@JsonPropertyOrder({"id","name","brand","rooms","description","category","messages","reservations"})
 public class Cabin implements Serializable{
-    /**
-     *Creacion de la tabla con sus etiquetas
-     */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    /**
-     * declaración de las columnas, sus headers y tipos de valor
-     * se inicia con el Id
-     */
-    private Integer CabinId;
-    @Column(nullable = false,length = 45)
-    /**
-     *nombre de la cabaña
-     */
+    private Integer id;
     private String name;
-    @Column(nullable = false,length = 45)
-    /**
-     * marca de la cabaña
-     */
     private String brand;
-    /**
-     * numero de cuartos de cabaña
-     */
     private Integer rooms;
-    @Column(nullable = false,length = 250)
-    /**
-     * Descripción de cabaña
-     */
     private String description;
     
-    /**
-     * creación de relaciones con la tabla categoría de muchos a uno
-     */
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("cabins")
-    /**
-     * atributo relación con categoría
-     */
     private Category category;
     
-    /**
-     * creación de las relaciones con la tabla mensajes de uno a muchos
-     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
-    /**
-     * atributo relación con mensajes
-     */
     private List<Message> messages;
     
-    /**
-     * creación de las relaciones con la tabla mensajes de uno a muchos
-     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
-    /**
-     * atributo relación con reservaciones
-     */
     private List<Reservation> reservations;
     
-    /**
-     * creacion de getter and setters
-     * @return Id de cabaña
-     */
-    public Integer getCabinId() {
-        return CabinId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCabinId(Integer CabinId) {
-        this.CabinId = CabinId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getBrand() {
