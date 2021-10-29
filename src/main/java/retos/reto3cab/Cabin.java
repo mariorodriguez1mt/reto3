@@ -25,28 +25,56 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cabin")
 public class Cabin implements Serializable{
-    
+    /**
+     * creacion de la tabla con sus campos
+     * atributo id de la tabla
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    /**
+     * atributo nombre de la tabla
+     */
     private String name;
+    /**
+     * atributo marca de la tabla
+     */
     private String brand;
+    /**
+     * atributo número de cuartos de la tabla
+     */
     private Integer rooms;
+    /**
+     * atributo descripción de la tabla
+     */
     private String description;
     
+    /**
+     * relación de muchos a uno con la tabla categoria
+     */
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("cabins")
     private Category category;
     
+    /**
+     * relación de uno a muchos con la tabla mensajes
+     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
     private List<Message> messages;
     
+    /**
+     * relación de uno a muchos con la tabla reservaciones
+     */
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "cabin")
     @JsonIgnoreProperties({"cabin", "client"})
     private List<Reservation> reservations;
     
+    /**
+     * getter and setters de los atributos de la tabla
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
